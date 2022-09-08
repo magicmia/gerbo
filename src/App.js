@@ -1,14 +1,16 @@
+import React from "react";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import Home from "./screens/Home";
 import Gallery from "./screens/Gallery";
 import Contact from "./screens/Contact";
 import Info from "./screens/Info";
+import Event from "./screens/Event";
 import { Navbar } from "responsive-navbar-react";
 import "responsive-navbar-react/dist/index.css";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
-import logo from "./logo.svg";
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+
 
 const App = () => {
   const images = [
@@ -63,21 +65,21 @@ const App = () => {
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/info" element={<Info />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/event" element={<Event />} />
       </Routes>
-      <div className="bg-black mt-1 w-50 flex-1  bottom-0">
-        <div style={{ color: "white" }}>
-          <h1 className="mt-3">KAPCSOLAT</h1>
-          <h1>Gerbo Produkció Kulturális Szolgáltató Kft.</h1>
-          <h1>00 36 70/315 94 98</h1>
-          <h1>info@gerbo.hu</h1>
-          <Link to={''} onclick={''}>Szerződési feltételek</Link>
+      <div className="bg-black flex flex-row w-full bottom-0">
+        <div className='mt-5 ml-5 flex-1 text-white'>
+          <h1 className="my-5 text-xl">KAPCSOLAT</h1>
+          <h1 className='mb-3'>Gerbo Produkció Kulturális Szolgáltató Kft.</h1>
+          <h1 className='mb-3'>00 36 70/315 94 98</h1>
+          <h1 className='mb-3'>info@gerbo.hu</h1>
+          <Link to={''} >Szerződési feltételek</Link>
         </div>
         <div
           style={{ color: "white" }}
-          className="bg-black w-50 flex-1 bottom-0"
-          textAlign="right"
+          className="bg-black flex-1" class='place-self-end mr-5 mb-5'
         >
-          jobb alulra kéne ikon, de hogy megy ez egyáltalán jobbra?
+          oké, már jobb oldalon van, de mi a szarért nem a helyén?
         </div>
       </div>
     </Router>

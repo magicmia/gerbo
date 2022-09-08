@@ -1,5 +1,6 @@
 import React from "react";
 import Gallery from "react-grid-gallery";
+import Line from "../assets/Line";
 
 const IMAGES = [
   {
@@ -29,23 +30,7 @@ const IMAGES = [
 const MyGallery = () => {
   return (
     <div>
-      <div
-        style={{
-          borderTop: "20px solid #fff ",
-          borderBottom: "20px solid #fff",
-          marginLeft: 20,
-          marginRight: 20,
-        }}
-      >
-        <hr
-          style={{
-            color: "#000000",
-            backgroundColor: "#000000",
-            height: 1,
-            borderColor: "#000000",
-          }}
-        />
-      </div>
+      <Line />
       <h1 className="mb-5">GALÉRIA</h1>
       <Gallery images={IMAGES} />
     </div>
