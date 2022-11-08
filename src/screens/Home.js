@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Slide } from "react-slideshow-image";
-import "react-slideshow-image/dist/styles.css";
-import Event from "./Event";
 import { useNavigate } from "react-router-dom";
+import { Slide } from "react-slideshow-image";
+import BasicModal from "../assets/modal.js";
+import "react-slideshow-image/dist/styles.css";
+import "react-dater/dist/index.css";
 
 const Home = () => {
   const navigate = useNavigate();
+  const [message] = useState("...loading");
+ 
 
-  const [message, setMessage] = useState("...loading");
   const images = [
     "https://images.unsplash.com/photo-1580757468214-c73f7062a5cb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8MTYlM0E5fGVufDB8fDB8fA%3D%3D&w=1000&q=80",
   ];
+
   const events = [
     {
       img: "https://images.unsplash.com/photo-1580757468214-c73f7062a5cb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8MTYlM0E5fGVufDB8fDB8fA%3D%3D&w=1000&q=80",
@@ -43,7 +46,6 @@ const Home = () => {
       id: 5,
     },
   ];
-  function handleClick() {}
 
   useEffect(() => {
     async function fetchData() {}
@@ -76,7 +78,7 @@ const Home = () => {
 
   return (
     <div>
-      <h1 className="my-5">Aktuális események</h1>
+      <h1 className="my-5 uppercase font-medium text-xl p-2">Aktuális események</h1>
       <div className="bg-white mt-100">
         <div className="w-auto">
           <Slide
@@ -94,8 +96,13 @@ const Home = () => {
           </Slide>
         </div>
       </div>
+      <div> itt kell majd lakni a monthpickernek</div>
+      <div> itt meg a köcsög listának </div>
+      <BasicModal /> 
     </div>
+    
   );
+   
 };
 
 export default Home;

@@ -1,16 +1,15 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./screens/Home";
 import Gallery from "./screens/Gallery";
-import Contact from "./screens/Contact";
 import Info from "./screens/Info";
 import Event from "./screens/Event";
 import { Navbar } from "responsive-navbar-react";
 import "responsive-navbar-react/dist/index.css";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
+import Picker from "react-month-picker";
 import "./App.css";
-
 
 const App = () => {
   const images = [
@@ -19,31 +18,31 @@ const App = () => {
   const props = {
     items: [
       {
-        text: "Események",
+        text: "ESEMÉNYEK",
         link: "/",
       },
       {
-        text: "Galéria",
-        link: "/gallery",
-      },
-      {
-        text: "Információk",
+        text: "INFO",
         link: "/info",
       },
       {
-        text: "Kapcsolat",
+        text: "GALÉRIA",
+        link: "/gallery",
+      },
+      {
+        text: "KAPCSOLAT",
         link: "/contact",
       },
     ],
     logo: {
-      text: "KISMIA",
+      text: "GERBO PRODUKCIÓ",
     },
     style: {
       barStyles: {
         background: "#000000",
       },
       sidebarStyles: {
-        background: "#222",
+        background: "#000000",
         buttonColor: "white",
       },
     },
@@ -52,7 +51,7 @@ const App = () => {
     <Router>
       <Navbar {...props} />
       <div className="bg-white mt-100">
-        <div className="w-auto bg-green ">
+        <div className="w-auto">
           <Slide>
             {images.map((image, index) => (
               <img className="w-screen" key={index} src={image} alt="" />
@@ -64,22 +63,32 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/info" element={<Info />} />
-        <Route path="/contact" element={<Contact />} />
         <Route path="/event" element={<Event />} />
       </Routes>
-      <div className="bg-black flex flex-row w-full bottom-0">
-        <div className='mt-5 ml-5 flex-1 text-white'>
+      <div className="bg-black flex flex-row w-full bottom-5 pb-5">
+        <div className="mt-5 ml-5 flex-1 text-white">
           <h1 className="my-5 text-xl">KAPCSOLAT</h1>
-          <h1 className='mb-3'>Gerbo Produkció Kulturális Szolgáltató Kft.</h1>
-          <h1 className='mb-3'>00 36 70/315 94 98</h1>
-          <h1 className='mb-3'>info@gerbo.hu</h1>
-          <Link to={''} >Szerződési feltételek</Link>
+          <h1 className="mb-3">Gerbo Produkció Kulturális Szolgáltató Kft.</h1>
+          <h1 className="mb-3">00 36 70/315 94 98</h1>
+          <a href="mailto:info@gerbo.hu"className="mb-3">info@gerbo.hu</a><br/>
+          <a href="">Szerződési feltételek</a>
         </div>
-        <div
-          style={{ color: "white" }}
-          className="bg-black flex-1" class='place-self-end mr-5 mb-5'
-        >
-          oké, már jobb oldalon van, de mi a szarért nem a helyén?
+        <div className="bg-black flex flex-row justify-center align-middle mr-5 mt-20 p-2">
+          <li className='h-[60px] w-[60px] ml-5'>
+            <a href="">
+              <img src="https://yt3.ggpht.com/ARsX5EPf1b8FcjNrwP6pwX0Nrba2zL1RPBpwwVM-5H85sxMwPuDBDXXTHMo1asvcPxBi6WWenWU=s900-c-k-c0x00ffffff-no-rj" />
+            </a>
+          </li>
+          <li className='h-[60px] w-[60px] ml-5'>
+            <a href="">
+              <img src="https://www.jegy.hu/resources/img/jegyhu_logo_square_300.jpg" />
+            </a>
+          </li>
+          <li className='h-[60px] w-[60px] ml-5'>
+            <a href="">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/240px-Facebook_f_logo_%282019%29.svg.png" />
+            </a>
+          </li>
         </div>
       </div>
     </Router>
