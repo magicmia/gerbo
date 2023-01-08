@@ -1,17 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Line from "../assets/Line";
+import { useSearchParams } from "react-router-dom";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../App";
 
 const image = [
   "https://www.blendernation.com/wp-content/uploads/2022/02/503-workshop-file-259x235.jpeg",
 ];
 
 const Event = () => {
+  let [searchParams] = useSearchParams();
+  const id = searchParams.get("id");
+  const [event, setEvent] = useState({});
+
+  useEffect(() => {
+    const asyncFunciton = async () => {
+      await getDocs(collection(db, "events")).then((querySnapshot) => {
+        console.log("ITT");
+        const newData = querySnapshot.docs.map((doc, index) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setEvent(newData.find((item) => item.id === id));
+      });
+    };
+    asyncFunciton();
+  }, [id]);
+
+  console.log(event?.date?.seconds);
+
   return (
     <div class="flex-col flex justify-center align-middle ">
       <Line />
       <div class="flex flex-row justify-between mx-5 mb-5 font-bold uppercase">
         <div class="flex flex-col justify-between w-1/3">
-          <h1 class="my-5"> A csodás előadás ideje</h1>
+          <h1 class="my-5">
+            {" "}
+            {event?.date
+              ? new Date(event?.date?.seconds * 1000).toLocaleDateString()
+              : "Időpont"}
+          </h1>
           <div>
             <h1 class="my-5">és időpontja</h1>
           </div>

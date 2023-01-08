@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Slide } from "react-slideshow-image";
 import DatePicker from "react-datepicker";
-import { registerLocale, setDefaultLocale } from "react-datepicker";
+import { registerLocale } from "react-datepicker";
 import hu from "date-fns/locale/hu";
 
 import "react-slideshow-image/dist/styles.css";
@@ -15,7 +14,6 @@ const Home = (props) => {
   registerLocale("hu", hu);
 
   const navigate = useNavigate();
-  const [message] = useState("...loading");
   const [startDate, setStartDate] = useState(new Date());
   const [events, setEvents] = useState([]);
   useEffect(() => {
@@ -23,63 +21,33 @@ const Home = (props) => {
       await getDocs(collection(db, "events")).then((querySnapshot) => {
         const newData = querySnapshot.docs.map((doc, index) => ({
           ...doc.data(),
-          id: index+1,
+          id: doc.id,
         }));
-        setEvents(newData);
+
+        setEvents([...newData, ...newData, ...newData, ...newData]);
       });
     };
     asyncFunciton();
   }, []);
-
-
-  const responsiveSettings = [
-    {
-      breakpoint: 800,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-      },
-    },
-    {
-      breakpoint: 500,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-      },
-    },
-    {
-      breakpoint: 300,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-      },
-    },
-  ];
-
+  
   return (
     <div>
       <h1 className="my-5 uppercase font-medium text-xl p-2">
         Aktuális események
       </h1>
-      <div className="bg-white mt-100">
-        <div className="w-auto">
-          <Slide
-            slidesToScroll={events.length}
-            arrows={props.modalIsOpen || events.length === 0 ? false : true}
-            responsive={responsiveSettings}
-          >
-            {events.map((element, index) => {            
-              return (
-                <div onClick={() => navigate("/event")} className="ml-5 w-5/6">
-                  <img key={index} src={element.img} alt="" />
-                  <h1>{element.title}</h1>
-                  <p>{element.description}</p>
-                  
-                </div>
-              );
-            })}
-          </Slide>
-        </div>
+      <div className="flex overflow-x-auto">
+        {events.map((element, index) => {
+          return (
+            <div
+              onClick={() => navigate(`/event?id=${element.id}`)}
+              class="ml-5"
+            >
+              <img class="w-full" key={index} src={element.img} alt="" />
+              <h1>{element.title}</h1>
+              <p>{element.description}</p>
+            </div>
+          );
+        })}
       </div>
       <DatePicker
         showMonthDropdown
