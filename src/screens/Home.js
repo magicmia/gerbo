@@ -24,12 +24,12 @@ const Home = (props) => {
           id: doc.id,
         }));
 
-        setEvents([...newData, ...newData, ...newData, ...newData]);
+        setEvents([...newData]);
       });
     };
     asyncFunciton();
   }, []);
-  
+
   return (
     <div>
       <h1 className="my-5 uppercase font-medium text-xl p-2">
@@ -57,10 +57,9 @@ const Home = (props) => {
       />
 
       {events
-        .filter((e) => new Date(e.date) > startDate)
+        //.filter((e) => new Date(e.date) > startDate)
         .map((element, index) => (
           <div onClick={() => navigate("/event")} className="ml-5 w-5/6 flex">
-            <p>{element.date}</p>
             <h1>{element.title}</h1>
             <p>{element.description}</p>
           </div>
