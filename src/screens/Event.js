@@ -27,7 +27,7 @@ const Event = () => {
     asyncFunciton();
   }, [id]);
 
-  console.log(event?.date?.seconds);
+  console.log(event?.date);
 
   return (
     <div class="flex-col flex justify-center align-middle ">
@@ -36,15 +36,13 @@ const Event = () => {
         <div class="flex flex-col justify-between w-1/3">
           <h1 class="my-5">
             {" "}
-            {event?.date
-              ? new Date(event?.date?.seconds * 1000).toLocaleDateString()
-              : "Időpont"}
+            {event?.date}
           </h1>
           <div>
             <h1 class="my-5">és időpontja</h1>
           </div>
         </div>
-        <img src={image} alt="" class="w-2/5" />
+        <img src={event?.img?.src} alt={event?.img?.title} class="w-2/5" />
       </div>
 
       <button

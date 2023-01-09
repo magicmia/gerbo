@@ -41,7 +41,7 @@ export const db = getFirestore(app);
 
 const App = () => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
-
+  const [popup, setPopup] = React.useState({});
   useEffect(() => {
     const asyncFunciton = async () => {
       await getDocs(collection(db, "popup")).then((querySnapshot) => {
@@ -50,6 +50,7 @@ const App = () => {
           id: doc.id,
         }));
         setIsOpen(newData[0].showPopup);
+        setPopup(newData[0]);
         Cookies.set("popup", "true");
       });
     };
@@ -96,7 +97,7 @@ const App = () => {
 
   return (
     <Router>
-      <BasicModal modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
+      <BasicModal popup={popup} modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
 
       <Navbar {...props} />
       <div class="bg-white mt-100">

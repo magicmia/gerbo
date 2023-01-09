@@ -26,7 +26,7 @@ const customStyles = {
       }
 };
 
-function BasicModal({ setIsOpen, modalIsOpen }) {
+function BasicModal({ setIsOpen, modalIsOpen, popup }) {
   function closeModal() {
     setIsOpen(false);
   }
@@ -39,13 +39,9 @@ function BasicModal({ setIsOpen, modalIsOpen }) {
         style={customStyles}
         contentLabel="Modal"
       >
-        <h2 class="flex-center m-5 place-content-center w-max font-bold text-xl">FIGYELEM!</h2>
+        <h2 class="flex-center m-5 place-content-center w-max font-bold text-xl">{popup?.title}</h2>
         <div>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam aliquet
-          arcu et ultrices porttitor. Sed pretium augue aliquam lacus tincidunt,
-          a eleifend ipsum accumsan. Cras id felis orci. Integer ultricies nisl
-          ut mauris laoreet interdum. Aenean blandit tempor tortor, ac placerat
-          lectus congue ac. Etiam rhoncus in metus eu pretium
+          {popup?.description}
         </div>
         <button
           onClick={closeModal}

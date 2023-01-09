@@ -42,7 +42,7 @@ const Home = (props) => {
               onClick={() => navigate(`/event?id=${element.id}`)}
               class="ml-5"
             >
-              <img class="w-full" key={index} src={element.img} alt="" />
+              <img class="w-full" key={index} src={element.img.src} alt="" />
               <h1>{element.title}</h1>
               <p>{element.description}</p>
             </div>
