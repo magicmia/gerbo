@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import { registerLocale } from "react-datepicker";
 import hu from "date-fns/locale/hu";
-
+import ImageSlider from "../assets/ImageSlider";
 import "react-slideshow-image/dist/styles.css";
 import "react-dater/dist/index.css";
 import "react-datepicker/dist/react-datepicker.css";
@@ -17,7 +17,7 @@ const Home = (props) => {
   const [startDate, setStartDate] = useState(new Date());
   const [events, setEvents] = useState([]);
   useEffect(() => {
-    const asyncFunciton = async () => {
+    const asyncFunction = async () => {
       await getDocs(collection(db, "events")).then((querySnapshot) => {
         const newData = querySnapshot.docs.map((doc, index) => ({
           ...doc.data(),
@@ -27,7 +27,7 @@ const Home = (props) => {
         setEvents([...newData]);
       });
     };
-    asyncFunciton();
+    asyncFunction();
   }, []);
 
   return (
@@ -49,7 +49,9 @@ const Home = (props) => {
           );
         })}
       </div>
+      <ImageSlider />
       <DatePicker
+        className="bg-black text-white rounded-md"
         showMonthDropdown
         locale="hu"
         selected={startDate}
@@ -59,9 +61,18 @@ const Home = (props) => {
       {events
         //.filter((e) => new Date(e.date) > startDate)
         .map((element, index) => (
-          <div onClick={() => navigate("/event")} className="ml-5 w-5/6 flex">
-            <h1>{element.title}</h1>
-            <p>{element.description}</p>
+          <div
+            onClick={() => navigate("/event")}
+            className=" px-5 w-full flex justify-between border-b-2"
+          >
+            <div><h1>16</h1><p>január</p></div>
+            <div>
+              <h1 className="text-xl font-bold">{element.title}</h1>
+              <p className="">{element.description}</p>{" "}
+            </div>
+            <div>
+              <h1>04.52</h1> <p>Tovább...</p>
+            </div>
           </div>
         ))}
     </div>

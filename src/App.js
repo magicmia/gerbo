@@ -9,7 +9,8 @@ import "responsive-navbar-react/dist/index.css";
 import "react-slideshow-image/dist/styles.css";
 import BasicModal from "./assets/modal";
 import SimpleImageSlider from "react-simple-image-slider";
-
+import ImageSlider from "./assets/ImageSlider";
+import {SliderData} from "./assets/SliderData";
 import "./App.css";
 
 // Import the functions you need from the SDKs you need
@@ -115,6 +116,7 @@ const App = () => {
         <Route path="/info" element={<Info />} />
         <Route path="/event" element={<Event />} />
       </Routes>
+      <ImageSlider slides={SliderData} />
 
       <div
         id={"contact"}

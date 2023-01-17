@@ -4,9 +4,6 @@ import { useSearchParams } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../App";
 
-const image = [
-  "https://www.blendernation.com/wp-content/uploads/2022/02/503-workshop-file-259x235.jpeg",
-];
 
 const Event = () => {
   let [searchParams] = useSearchParams();
@@ -14,9 +11,8 @@ const Event = () => {
   const [event, setEvent] = useState({});
 
   useEffect(() => {
-    const asyncFunciton = async () => {
+    const asyncFunction = async () => {
       await getDocs(collection(db, "events")).then((querySnapshot) => {
-        console.log("ITT");
         const newData = querySnapshot.docs.map((doc, index) => ({
           ...doc.data(),
           id: doc.id,
@@ -24,7 +20,7 @@ const Event = () => {
         setEvent(newData.find((item) => item.id === id));
       });
     };
-    asyncFunciton();
+    asyncFunction();
   }, [id]);
 
   console.log(event?.date);
@@ -35,29 +31,28 @@ const Event = () => {
       <div class="flex flex-row justify-between mx-5 mb-5 font-bold uppercase">
         <div class="flex flex-col justify-between w-1/3">
           <h1 class="my-5">
-            {" "}
-            {event?.date}
+            {"event?.date"}
           </h1>
           <div>
-            <h1 class="my-5">és időpontja</h1>
+            <h1 class="my-5">{"event?.time"}</h1>
           </div>
         </div>
         <img src={event?.img?.src} alt={event?.img?.title} class="w-2/5" />
       </div>
 
       <button
-        onClick={"externalLink"}
+        //onClick={event?.ticket}
         class="w-3/4 self-center md:text-center h-12 text-sm bg-black text-white uppercase cursor-pointer rounded flex justify-center align-middle p-2"
       >
         JEGYEK
       </button>
       <div
-        onClick={"fbEvent"}
+        //onClick={event?.facebook}
         class="self-center my-5 uppercase flex justify-center align-middle p-2 font-bold text-base"
       >
         FACEBOOK ESEMÉNY
       </div>
-      <h1 class="mx-5 font-bold uppercase">ez itt a kert </h1>
+      <h1 class="mx-5 font-bold uppercase">{event?.title}</h1>
       <p class="mx-5 my-5">
         <p>
           8230 Balatonf&uuml;red, Horv&aacute;th M. u. 64. Tel.: 06-87/340-428
@@ -122,7 +117,7 @@ const Event = () => {
       </p>
       <div class="w-full h-80 p-6 justify-center flex">
         {event?.address && (
-          <iframe
+          <iframe title='map'
             src={`https://www.google.com/maps?q=${event?.address}&output=embed`}
           />
         )}
